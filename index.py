@@ -1,16 +1,13 @@
-
 import pandas as pd
 
 df = pd.DataFrame([[12,42,64],[32,55,75],[39,0,33]])
 
 coff = pd.read_csv('https://raw.githubusercontent.com/KeithGalli/complete-pandas-tutorial/refs/heads/master/warmup-data/coffee.csv')
+bios = pd.read_csv('https://raw.githubusercontent.com/KeithGalli/complete-pandas-tutorial/refs/heads/master/data/bios.csv')
+# sort ,ascending 
 
-#at & iat
+#sort one column
+#print(coff.sort_values("Units Sold",ascending=False))
 
-print(coff)
-print(coff.at[1,"Units Sold"])
-
-#iat rows and columns must be in numerics
-print(coff.iat[0,2])
-#at and iat only gives exact single output 
-#not multiple
+#sort two column
+print(coff.sort_values(["Units Sold","Coffee Type"],ascending=[0,1]))
