@@ -1,19 +1,22 @@
 import pandas as pd
 import numpy as np
 
-df = pd.DataFrame([[12,42,64],[32,55,75],[39,0,33]])
+coff = pd.read_csv('./data/coffee.csv')
+#bios = pd.read_csv('https://raw.githubusercontent.com/KeithGalli/complete-pandas-tutorial/refs/heads/master/data/bios.csv')
+coff["Price"] = np.where(coff["Coffee Type"]=="Latte" ,3.99,5.99)
+#cnew = coff
+#here cnew just pointing to the coff DF but we need to
+# copy the coff DF, So
+ 
+#copy
+#this actually copies the DF to new 
 
-coff = pd.read_csv('https://raw.githubusercontent.com/KeithGalli/complete-pandas-tutorial/refs/heads/master/warmup-data/coffee.csv')
-bios = pd.read_csv('https://raw.githubusercontent.com/KeithGalli/complete-pandas-tutorial/refs/heads/master/data/bios.csv')
-# Add / Remove Columns
+cnew = coff.copy()
+cnew["revenue"]=cnew["Units Sold"] * cnew["Price"]
 
-coff["Price"] = np.where(coff["Coffee Type"] == "Latte",3.99,5.99)
+print(cnew.head())
 
-#print(coff.head(3))
+#Rename
 
-#delete 
-
-#coff.drop(2)
-#print(coff.drop(columns=["Units Sold"]))
-print(coff.drop(columns=["Units Sold"],inplace= True))
-print(coff.head())
+cnew = cnew.rename(columns= {"Price":"price"})
+print(cnew.head())
