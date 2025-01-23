@@ -2,21 +2,20 @@ import pandas as pd
 import numpy as np
 
 coff = pd.read_csv('./data/coffee.csv')
-#bios = pd.read_csv('https://raw.githubusercontent.com/KeithGalli/complete-pandas-tutorial/refs/heads/master/data/bios.csv')
-coff["Price"] = np.where(coff["Coffee Type"]=="Latte" ,3.99,5.99)
-#cnew = coff
-#here cnew just pointing to the coff DF but we need to
-# copy the coff DF, So
- 
-#copy
-#this actually copies the DF to new 
+bios = pd.read_csv('./data/bios.csv')
 
-cnew = coff.copy()
-cnew["revenue"]=cnew["Units Sold"] * cnew["Price"]
+a = bios.loc[bios['height_cm']>215,["name","height_cm"]]
+a = bios[(bios["height_cm"]>220) &(bios["born_country"] =="USA")] 
+print(a.head())
 
-print(cnew.head())
+# search using str contains
 
-#Rename
+a = bios[bios["name"].str.contains("sam",case = False)]
+print(a.head())
+a = bios[bios["born_country"].isin(["USA","FRA"]) &bios["name"].str.startswith("K")]
+print(a.head())
 
-cnew = cnew.rename(columns= {"Price":"price"})
-print(cnew.head())
+# use query to get output
+
+a = bios.query('born_country == "USA" and height_cm >= 200')
+print(a.head())
